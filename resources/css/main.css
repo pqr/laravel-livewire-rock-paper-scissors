@@ -1,0 +1,68 @@
+@tailwind base;
+
+.site-name {
+    @apply text-2xl
+}
+
+.game-name {
+    @apply text-xl
+}
+
+.choices {
+    @apply flex;
+    column-gap: 4rem;
+}
+
+.choices__head {
+    @apply text-lg my-2 font-bold
+}
+
+.user-name {
+    @apply text-lg my-2 font-bold
+}
+
+.user-name__input {
+    @apply shadow border rounded w-full py-2 px-3 text-gray-700 w-64
+}
+
+.btn {
+    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid;
+}
+
+.btn-user_active:hover, .btn-user_active:active, .btn-user_active:focus {
+    @apply bg-blue-500 text-white;
+}
+
+.btn_disabled {
+    @apply opacity-50 bg-gray-400 cursor-default;
+}
+
+.btn_choosen {
+    @apply font-extrabold opacity-100;
+}
+
+.game-result {
+    @apply my-2 py-2 px-4 inline-block font-extrabold;
+}
+
+.start-new-link {
+    @apply underline;
+}
+
+.start-new-link:hover, .start-new-link:active {
+    @apply text-blue-900;
+}
+
+.win {
+    @apply bg-green-400;
+}
+
+.loss {
+    @apply bg-red-200;
+}
+
+.draw {
+    @apply bg-gray-400;
+}
+
+
