@@ -8,7 +8,7 @@
         @livewireStyles
     </head>
     <body>
-    <h1 class="site-name">Rock Paper Scissors</h1>
+    <h1 class="site-name">@lang('game.site_name')</h1>
 
     @livewire('game')
 
