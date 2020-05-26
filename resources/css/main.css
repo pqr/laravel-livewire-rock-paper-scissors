@@ -1,5 +1,9 @@
 @tailwind base;
 
+body {
+    @apply ml-2;
+}
+
 .site-name {
     @apply text-2xl
 }
@@ -9,12 +13,13 @@
 }
 
 .choices {
-    @apply flex;
-    column-gap: 4rem;
+    display: grid;
+    grid-template-columns: 9rem 9rem;
+    grid-column-gap: 1rem;
 }
 
 .choices__head {
-    @apply text-lg my-2 font-bold
+    @apply my-2 font-bold text-center
 }
 
 .user-name {
@@ -26,7 +31,7 @@
 }
 
 .btn {
-    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid w-32;
+    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid w-full;
 }
 
 .btn_active:hover, .btn_active:active, .btn_active:focus {
@@ -41,6 +46,36 @@
     @apply font-extrabold opacity-100;
 }
 
+.btn-user-rock:after {
+    @apply ml-2;
+    content: "🤜";
+}
+
+.btn-user-paper:after {
+    @apply ml-2;
+    content: "✋";
+}
+
+.btn-user-scissors:after {
+    @apply ml-2;
+    content: "✌️";
+}
+
+.btn-opponent-rock:before {
+    @apply mr-2;
+    content: "🤛";
+}
+
+.btn-opponent-paper:before {
+    @apply mr-2;
+    content: "🤚";
+}
+
+.btn-opponent-scissors:before {
+    @apply mr-2;
+    content: "✌️";
+}
+
 .user-result {
     @apply my-2 py-2 px-4 inline-block font-extrabold;
 }
@@ -51,6 +86,11 @@
 
 .start-new-link:hover, .start-new-link:active {
     @apply text-blue-900;
+}
+
+.user-result {
+    @apply my-2 py-2 px-4 inline-block font-extrabold rounded text-center;
+    width: 19rem;
 }
 
 .win {

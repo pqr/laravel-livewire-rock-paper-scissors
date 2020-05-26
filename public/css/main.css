@@ -595,6 +595,10 @@ video {
   height: auto;
 }
 
+body {
+  margin-left: 0.5rem;
+}
+
 .site-name {
   font-size: 1.5rem
 }
@@ -604,16 +608,16 @@ video {
 }
 
 .choices {
-  display: flex;
-  -moz-column-gap: 4rem;
-       column-gap: 4rem;
+  display: grid;
+  grid-template-columns: 9rem 9rem;
+  grid-column-gap: 1rem;
 }
 
 .choices__head {
-  font-size: 1.125rem;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
-  font-weight: 700
+  font-weight: 700;
+  text-align: center
 }
 
 .user-name {
@@ -649,7 +653,7 @@ video {
   border-radius: 9999px;
   border-width: 2px;
   border-style: solid;
-  width: 8rem;
+  width: 100%;
 }
 
 .btn_active:hover, .btn_active:active, .btn_active:focus {
@@ -674,6 +678,36 @@ video {
   opacity: 1;
 }
 
+.btn-user-rock:after {
+  margin-left: 0.5rem;
+  content: "\1F91C";
+}
+
+.btn-user-paper:after {
+  margin-left: 0.5rem;
+  content: "\270B";
+}
+
+.btn-user-scissors:after {
+  margin-left: 0.5rem;
+  content: "\270C\FE0F";
+}
+
+.btn-opponent-rock:before {
+  margin-right: 0.5rem;
+  content: "\1F91B";
+}
+
+.btn-opponent-paper:before {
+  margin-right: 0.5rem;
+  content: "\1F91A";
+}
+
+.btn-opponent-scissors:before {
+  margin-right: 0.5rem;
+  content: "\270C\FE0F";
+}
+
 .user-result {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
@@ -693,6 +727,20 @@ video {
   --text-opacity: 1;
   color: #2a4365;
   color: rgba(42, 67, 101, var(--text-opacity));
+}
+
+.user-result {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: inline-block;
+  font-weight: 800;
+  border-radius: 0.25rem;
+  text-align: center;
+  width: 19rem;
 }
 
 .win {
