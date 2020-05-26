@@ -26,10 +26,10 @@
 }
 
 .btn {
-    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid;
+    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid w-32;
 }
 
-.btn-user_active:hover, .btn-user_active:active, .btn-user_active:focus {
+.btn_active:hover, .btn_active:active, .btn_active:focus {
     @apply bg-blue-500 text-white;
 }
 
@@ -41,7 +41,7 @@
     @apply font-extrabold opacity-100;
 }
 
-.game-result {
+.user-result {
     @apply my-2 py-2 px-4 inline-block font-extrabold;
 }
 

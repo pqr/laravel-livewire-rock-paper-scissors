@@ -649,9 +649,10 @@ video {
   border-radius: 9999px;
   border-width: 2px;
   border-style: solid;
+  width: 8rem;
 }
 
-.btn-user_active:hover, .btn-user_active:active, .btn-user_active:focus {
+.btn_active:hover, .btn_active:active, .btn_active:focus {
   --bg-opacity: 1;
   background-color: #4299e1;
   background-color: rgba(66, 153, 225, var(--bg-opacity));
@@ -673,7 +674,7 @@ video {
   opacity: 1;
 }
 
-.game-result {
+.user-result {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   padding-top: 0.5rem;

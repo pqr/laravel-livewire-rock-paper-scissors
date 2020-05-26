@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class Game extends Component
 {
-    private const OPTIONS = ['Rock', 'Paper', 'Scissors'];
+    private const OPTIONS = ['Rock', 'Paper', 'Scissors️'];
 
     private const BEATS = [
         'Rock' => 'Scissors',
@@ -17,18 +17,20 @@ class Game extends Component
     public ?string $userChoice;
     public ?string $opponentChoice;
     public ?string $userResult;
+    public ?string $opponentResult;
 
     public bool $gameEnded = false;
 
-    public function mount()
+    public function mount(): void
     {
         $this->opponentChoice = $this->getRandomChoice();
     }
 
-    public function choose($choice)
+    public function choose($choice): void
     {
         $this->userChoice = $choice;
         $this->userResult = $this->getUserResult();
+        $this->opponentResult = $this->getOpponentResult();
         $this->gameEnded = true;
     }
 
@@ -43,12 +45,22 @@ class Game extends Component
         return self::OPTIONS[$randomIndex];
     }
 
-    private function getUserResult()
+    private function getUserResult(): string
     {
-        if ($this->userChoice === $this->opponentChoice) {
+        return $this->getResult($this->userChoice, $this->opponentChoice);
+    }
+
+    private function getOpponentResult(): string
+    {
+        return $this->getResult($this->opponentChoice, $this->userChoice);
+    }
+
+    private function getResult(string $choice1, string $choice2): string
+    {
+        if ($choice1 === $choice2) {
             return 'draw';
         }
 
-        return self::BEATS[$this->userChoice] === $this->opponentChoice ? 'win' : 'loss';
+        return self::BEATS[$choice1] === $choice2 ? 'win' : 'loss';
     }
 }
