@@ -1,6 +1,10 @@
 <div>
+    <a href="{{ route('lobby') }}" class="lobby-link">@lang('game.back_to_lobby')</a>
+
     <h2 class="game-name">@lang('game.game_name')</h2>
     @livewire('user-name')
+
+    {{ $game }}
 
     <div class="choices">
         <div>
@@ -28,11 +32,11 @@
                 @include('livewire.partials.btn-opponent', ['buttonName' => \App\Http\Livewire\Game::SCISSORS])
             </div>
 
-            @if (!$isGameEnded) @lang('game.opponent_note') @endif
+            @if (!$gameover) @lang('game.opponent_note') @endif
         </div>
     </div>
 
-    @if ($isGameEnded)
+    @if ($gameover)
         <p class="user-result {{ $userResult }}">@lang('game.result_'. $userResult)</p>
     @endif
 </div>

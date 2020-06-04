@@ -80,12 +80,16 @@ body {
     @apply my-2 py-2 px-4 inline-block font-extrabold;
 }
 
-.start-new-link {
-    @apply underline;
+.btn-new {
+    @apply font-bold my-1 py-2 px-4 rounded-full border-2 border-solid;
 }
 
-.start-new-link:hover, .start-new-link:active {
-    @apply text-blue-900;
+.lobby-link {
+    @apply text-blue-900 underline;
+}
+
+.lobby-link:hover, .lobby-link:active {
+    @apply text-blue-700 underline;
 }
 
 .user-result {

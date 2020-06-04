@@ -10,8 +10,9 @@
     <body>
     <h1 class="site-name">@lang('game.site_name')</h1>
 
-    @livewire('game')
+    @yield('content')
 
     @livewireScripts
+    <script src="{{ mix('js/app.js') }}"></script>
     </body>
 </html>

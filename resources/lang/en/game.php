@@ -2,6 +2,7 @@
 
 return [
     'site_name' => 'Rock, Paper, Scissors',
+    'back_to_lobby' => 'Back to Lobby',
     'game_name' => 'Welcome to the game',
     'rock' => 'Rock',
     'paper' => 'Paper',

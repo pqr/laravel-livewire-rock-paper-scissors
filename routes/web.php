@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::livewire('/', 'lobby')->name('lobby');
+Route::livewire('/game/{game}', 'game')->name('game');
