@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\Game as GameModel;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class Game extends Component
@@ -21,9 +22,6 @@ class Game extends Component
     private const LOSS = 'loss';
     private const DRAW = 'draw';
 
-    public ?string $userChoice = null;
-    public ?string $opponentChoice = null;
-
     /**
      * @var GameModel
      */
@@ -32,41 +30,41 @@ class Game extends Component
     public function mount(GameModel $game): void
     {
         $this->game = $game;
-        $payers = $this->game->players;
 
-        if (isset($payers[0])) {
-            $this->userChoice = $payers[0]->choice;
-        }
-
-        if (isset($payers[1])) {
-            $this->opponentChoice = $payers[1]->choice;
-        }
+        $userId = Auth::id();
+        $this->game->joinIfPossible($userId);
     }
 
     public function choose($choice): void
     {
-        $this->userChoice = $choice;
-        $this->opponentChoice = $this->getRandomChoice();
-
-        $this->game->gameover = true;
-        $this->game->save();
-
-        $this->game->players()->createMany(
-            [
-                ['choice' => $this->userChoice],
-                ['choice' => $this->opponentChoice],
-            ]
-        );
+        $this->game->makeUserChoice(Auth::id(), $choice);
     }
 
     public function render()
     {
+        $userId = Auth::id();
+
+        $isMine = $this->game->isMine($userId);
+        if ($isMine) {
+            $player1Choice = $this->game->getMyChoice($userId);
+            $player2Choice = null;
+            if ($this->game->gameover) {
+                $player2Choice = $this->game->getOpponentChoice($userId);
+            }
+        } else {
+            $player1Choice = $this->game->players[0]['choice'] ?? null;
+            $player2Choice = $this->game->players[1]['choice'] ?? null;
+        }
+
         return view(
             'livewire.game',
             [
                 'gameover' => $this->game->gameover,
-                'userResult' => $this->getUserResult(),
-                'opponentResult' => $this->getOpponentResult(),
+                'isMine' => $isMine,
+                'player1Choice' => $player1Choice,
+                'player2Choice' => $player2Choice,
+                'player1Result' => $this->getResult($player1Choice, $player2Choice),
+                'player2Result' => $this->getResult($player2Choice, $player1Choice),
             ]
         );
     }
@@ -75,16 +73,6 @@ class Game extends Component
     {
         $randomIndex = random_int(0, 2);
         return [self::ROCK, self::PAPER, self::SCISSORS][$randomIndex];
-    }
-
-    private function getUserResult(): ?string
-    {
-        return $this->getResult($this->userChoice, $this->opponentChoice);
-    }
-
-    private function getOpponentResult(): ?string
-    {
-        return $this->getResult($this->opponentChoice, $this->userChoice);
     }
 
     private function getResult(?string $choice1, ?string $choice2): ?string

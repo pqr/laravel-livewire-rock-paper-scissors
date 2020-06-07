@@ -1,9 +1,9 @@
 <button wire:click="choose('{{ $buttonName }}')"
-        @if ($userChoice) disabled @endif
+        @if ($player1Choice) disabled @endif
 
         class="btn btn-user-{{$buttonName}}
-@if ($userChoice === $buttonName) btn_choosen {{ $userResult }} @endif
-@if ($userChoice) btn_disabled @else btn_active @endif
+@if ($player1Choice === $buttonName) btn_choosen {{ $player1Result }} @endif
+@if ($player1Choice) btn_disabled @else btn_active @endif
     "
 >
     @lang('game.' . $buttonName)

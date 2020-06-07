@@ -37,11 +37,70 @@ class Game extends Model
         'gameover' => 'boolean',
     ];
 
+    protected $withCount = ['players'];
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function players()
     {
         return $this->hasMany(\App\Models\Player::class);
+    }
+
+    public function isMine(int $userId)
+    {
+        return (bool)$this->players->firstWhere('user_id', $userId);
+    }
+
+
+
+    public function joinIfPossible(int $userId)
+    {
+        if ($this->players_count >= 2) {
+            return;
+        }
+
+        if ($this->isMine($userId)) {
+            return;
+        }
+
+        $this->players()->create(['user_id' => $userId]);
+        $this->load('players');
+    }
+
+    public function getMyChoice(int $userId): ?string
+    {
+        $me = $this->players->firstWhere('user_id', $userId);
+        if (!$me) {
+            throw new \Exception('Not in the game');
+        }
+
+        return $me->choice;
+    }
+
+    public function getOpponentChoice(int $userId): ?string
+    {
+        $opponent = $this->players->firstWhere('user_id', '!=', $userId);
+        if (!$opponent) {
+            return null;
+        }
+
+        return $opponent->choice;
+    }
+
+    public function makeUserChoice(int $userId, string $choice): void
+    {
+        if (!$this->isMine($userId)) {
+            throw new \Exception('Not my game');
+        }
+
+        $me = $this->players->firstWhere('user_id', $userId);
+        $me->choice = $choice;
+        $me->save();
+
+        if ($this->getOpponentChoice($userId)) {
+            $this->gameover = true;
+            $this->save();
+        }
     }
 }

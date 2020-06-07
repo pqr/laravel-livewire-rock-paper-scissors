@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class UserName extends Component
@@ -10,12 +11,12 @@ class UserName extends Component
 
     public function mount()
     {
-        $this->name = session('UserName', '');
+        $this->name = Auth::user()->name ?? '';
     }
 
     public function updatedName()
     {
-        session(['UserName' => $this->name]);
+        Auth::user()->update(['name' => $this->name]);
     }
 
     public function render()

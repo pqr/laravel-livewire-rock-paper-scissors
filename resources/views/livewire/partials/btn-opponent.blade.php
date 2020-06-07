@@ -1,6 +1,6 @@
 <button disabled
         class="btn btn_disabled btn-opponent-{{$buttonName}}
-        @if ($gameover && $buttonName === $opponentChoice) btn_choosen  {{ $opponentResult }}  @endif
+        @if ($buttonName === $choice) btn_choosen  {{ $result }}  @endif
             "
 >
     @lang('game.' . $buttonName)
